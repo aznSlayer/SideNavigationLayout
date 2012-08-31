@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SideNavigationLayoutExample</string>
+    <string name="title_activity_side_navigation_layout_example">SideNavigationLayoutExample</string>
+    <string name="pan">Pan</string>
+    <string name="unpan">Unpan</string>
+    
+    <string-array name="website_names">
+        <item>Google</item>
+        <item>Facebook</item>
+        <item>Youtube</item>
+        <item>Yahoo</item>
+        <item>Baidu</item>
+        <item>Wikipedia</item>
+        <item>Windows Live</item>
+        <item>Qq</item>
+        <item>Twitter</item>
+        <item>Amazon</item>
+    </string-array>
+    <string-array name="website_urls">
+        <item>http://www.google.com</item>
+        <item>http://www.facebook.com</item>
+        <item>http://www.youtube.com</item>
+        <item>http://www.yahoo.com</item>
+        <item>http://www.baidu.com</item>
+        <item>http://www.wikipedia.org</item>
+        <item>http://www.live.com</item>
+        <item>http://www.qq.com</item>
+        <item>http://www.twitter.com</item>
+        <item>http://www.amazon.com</item>
+    </string-array>
+
+</resources>
