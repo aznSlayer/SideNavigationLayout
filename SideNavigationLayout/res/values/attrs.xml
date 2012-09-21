@@ -4,6 +4,7 @@
 
         <!-- Spacing value. -->
         <attr name="right_pan_bound" format="dimension" />
+        <attr name="left_pan_bound" format="dimension" />
         <!-- Navigation view layout ID to link at view creation time. -->
         <attr name="navigation_layout" format="reference" />
         <!-- Main view layout ID to link at view creation time. -->

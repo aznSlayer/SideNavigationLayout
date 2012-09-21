@@ -75,7 +75,9 @@ public class SideNavigationLayoutExample extends Activity implements OnPanListen
     }
 
     /**
-     * Update the right pan bound with the width of the navigation view.
+     * Update the right pan bound with the width of the navigation view and the
+     * left pan bound to 0 to hide the navigation view completely when the main
+     * view is viewable.
      */
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -85,6 +87,7 @@ public class SideNavigationLayoutExample extends Activity implements OnPanListen
 
         final View view = findViewById(R.id.listview);
         mLayout.setRightPanBound(displaymetrics.widthPixels - view.getWidth());
+        mLayout.setLeftPanBound(0);
     }
 
     /**

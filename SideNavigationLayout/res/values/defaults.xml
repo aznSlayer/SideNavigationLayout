@@ -1,5 +1,5 @@
 <resources>
 
-    <dimen name="default_right_pan_bound">80dp</dimen>
+    <dimen name="default_pan_bound">80dp</dimen>
 
 </resources>

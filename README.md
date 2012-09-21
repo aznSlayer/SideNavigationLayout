@@ -5,7 +5,7 @@ A layout that contains two children, a navigation view to the left and a main vi
 
 ![1] -> ![2]
 
-**Download:** [JAR library](https://github.com/downloads/herroWorld/SideNavigationLayout/sidenavigationlayout_v1.0.jar)
+**Download:** [JAR library](https://github.com/downloads/herroWorld/SideNavigationLayout/sidenavigationlayout_v1.1.jar)
 
 ## Usage
 When using this library, simply add the JAR to your project:
@@ -72,8 +72,13 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     }
 });
 
-// Update the right pan bound with the width of the navigation view
+/**
+ * Update the right pan bound with the width of the navigation view and the
+ * left pan bound to 0 to hide the navigation view completely when the main
+ * view is viewable.
+ */
 mLayout.setRightPanBound(displaymetrics.widthPixels - view.getWidth());
+mLayout.setLeftPanBound(0);
 
 /**
  * Listening onPanEnd notifications to change button text.

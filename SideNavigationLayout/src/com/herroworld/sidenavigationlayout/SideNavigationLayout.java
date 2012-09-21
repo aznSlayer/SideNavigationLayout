@@ -24,8 +24,9 @@ public class SideNavigationLayout extends ViewGroup implements PanView.OnMeasure
     private static final String TAG = SideNavigationLayout.class.getSimpleName();
     private static boolean DEBUG = false;
 
-    // This is the maximum right bound for the main view
+    // Maximum bounds for the main view
     private int mRightPanBound;
+    private int mLeftPanBound;
 
     // PanView for panning the main view
     private final PanView mPanView;
@@ -52,11 +53,13 @@ public class SideNavigationLayout extends ViewGroup implements PanView.OnMeasure
         // reading attributes
         final TypedArray a = getContext().obtainStyledAttributes(attrs,
                 R.styleable.SideNavigationLayout);
-        final int defaultRightPanBound = context.getResources().getDimensionPixelSize(
-                R.dimen.default_right_pan_bound);
+        final int defaultPanBound = context.getResources().getDimensionPixelSize(
+                R.dimen.default_pan_bound);
 
         mRightPanBound = a.getDimensionPixelSize(R.styleable.SideNavigationLayout_right_pan_bound,
-                defaultRightPanBound);
+                defaultPanBound);
+        mLeftPanBound = a.getDimensionPixelSize(R.styleable.SideNavigationLayout_left_pan_bound,
+                defaultPanBound);
 
         final int navigationLayoutId = a.getResourceId(
                 R.styleable.SideNavigationLayout_navigation_layout, 0);
@@ -122,6 +125,15 @@ public class SideNavigationLayout extends ViewGroup implements PanView.OnMeasure
      */
     public void setRightPanBound(int bound) {
         mRightPanBound = bound;
+    }
+
+    /**
+     * Setting the maximum left pan bound for the main view.
+     * 
+     * @param bound The left pan bound.
+     */
+    public void setLeftPanBound(int bound) {
+        mLeftPanBound = bound;
     }
 
     /**
@@ -205,7 +217,8 @@ public class SideNavigationLayout extends ViewGroup implements PanView.OnMeasure
                         heightMeasureSpec);
             } else if (view == mMainViewContainer) {
                 final int contentWidth = MeasureSpec.getSize(widthMeasureSpec);
-                view.measure(MeasureSpec.makeMeasureSpec(contentWidth, MeasureSpec.EXACTLY),
+                view.measure(MeasureSpec.makeMeasureSpec(contentWidth - mLeftPanBound,
+                        MeasureSpec.EXACTLY),
                         heightMeasureSpec);
             } else {
                 view.measure(widthMeasureSpec, heightMeasureSpec);
@@ -219,7 +232,12 @@ public class SideNavigationLayout extends ViewGroup implements PanView.OnMeasure
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         for (int i = 0, childrenCount = getChildCount(); i < childrenCount; ++i) {
             final View view = getChildAt(i);
-            view.layout(l, t, l + view.getMeasuredWidth(), t + view.getMeasuredHeight());
+            if (view == mMainViewContainer) {
+                view.layout(mLeftPanBound, 0, mLeftPanBound + view.getMeasuredWidth(),
+                        view.getMeasuredHeight());
+            } else {
+                view.layout(l, 0, l + view.getMeasuredWidth(), view.getMeasuredHeight());
+            }
         }
     }
 
@@ -255,12 +273,22 @@ public class SideNavigationLayout extends ViewGroup implements PanView.OnMeasure
     }
 
     /**
-     * Provide maximum pan.
+     * Provide maximum right pan.
      * 
-     * @return Maximum pan.
+     * @return Maximum right pan.
      */
     @Override
-    public int getMaxPan() {
+    public int getMaxRightPan() {
         return getWidth() - mRightPanBound;
+    }
+
+    /**
+     * Provide maximum left pan.
+     * 
+     * @return Maximum left pan.
+     */
+    @Override
+    public int getMaxLeftPan() {
+        return mLeftPanBound;
     }
 }
